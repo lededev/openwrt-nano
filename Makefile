@@ -10,7 +10,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=nano
 PKG_O_NAME:=nano
 PKG_VERSION:=4.2
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 PKG_LICENSE:=GPL-3.0+
 PKG_LICENSE_FILES:=COPYING
 
@@ -41,7 +41,7 @@ endef
 
 CONFIGURE_ARGS += \
 	--enable-tiny \
-	--disable-utf8 \
+	--enable-utf8 \
 	--without-slang \
 	--enable-color \
 	--enable-nanorc \
