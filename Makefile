@@ -8,51 +8,50 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nano
-PKG_O_NAME:=nano
-PKG_VERSION:=4.3
+PKG_VERSION:=4.4
 PKG_RELEASE:=1
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=@GNU/nano
+PKG_HASH:=2af222e0354848ffaa3af31b5cd0a77917e9cb7742cd073d762f3c32f0f582c7
+
 PKG_LICENSE:=GPL-3.0+
 PKG_LICENSE_FILES:=COPYING
-
-PKG_SOURCE:=$(PKG_O_NAME)-$(PKG_VERSION).tar.xz
-PKG_SOURCE_URL:=@GNU/nano
-PKG_HASH:=00d3ad1a287a85b4bf83e5f06cedd0a9f880413682bebd52b4b1e2af8cfc0d81
+PKG_MAINTAINER:=Jonathan Bennett <JBennett@incomsystems.biz>, Hannu Nyman <hannu.nyman@iki.fi>
 
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/nano-c
+define Package/nano
   SUBMENU:=Editors
   SECTION:=utils
   CATEGORY:=Utilities
-  TITLE:=Color An enhanced clone of the Pico text editor
-  URL:=http://www.nano-editor.org/
-  MAINTAINER:=Jonathan Bennett <JBennett@incomsystems.biz>, \
-		Hannu Nyman <hannu.nyman@iki.fi>
+  TITLE:=An enhanced clone of the Pico text editor
+  URL:=https://www.nano-editor.org/
   DEPENDS:=+libncurses
 endef
 
-define Package/nano-c/description
+define Package/nano/description
   Nano (Nano's ANOther editor, or Not ANOther editor) is an enhanced clone
-  of the Pico text editor, color highlight enabled.
+  of the Pico text editor.
 endef
 
 CONFIGURE_ARGS += \
 	--enable-tiny \
-	--enable-utf8 \
+	--disable-utf8 \
 	--without-slang \
-	--enable-color \
+	--disable-color \
 	--enable-nanorc \
 
 CONFIGURE_VARS += \
 	ac_cv_header_regex_h=no \
 
-define Package/nano-c/install
+define Package/nano/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(CP) $(PKG_INSTALL_DIR)/usr/bin/$(PKG_O_NAME) $(1)/usr/bin/
+	$(CP) $(PKG_INSTALL_DIR)/usr/bin/$(PKG_NAME) $(1)/usr/bin/
 endef
 
-$(eval $(call BuildPackage,nano-c))
+$(eval $(call BuildPackage,nano))
 
