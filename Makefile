@@ -24,7 +24,7 @@ PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/nano
+define Package/nano-c
   SUBMENU:=Editors
   SECTION:=utils
   CATEGORY:=Utilities
@@ -33,25 +33,25 @@ define Package/nano
   DEPENDS:=+libncurses
 endef
 
-define Package/nano/description
+define Package/nano-c/description
   Nano (Nano's ANOther editor, or Not ANOther editor) is an enhanced clone
-  of the Pico text editor.
+  of the Pico text editor, color highlight enabled.
 endef
 
 CONFIGURE_ARGS += \
 	--enable-tiny \
-	--disable-utf8 \
+	--enable-utf8 \
 	--without-slang \
-	--disable-color \
+	--enable-color \
 	--enable-nanorc \
 
 CONFIGURE_VARS += \
 	ac_cv_header_regex_h=no \
 
-define Package/nano/install
+define Package/nano-c/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(CP) $(PKG_INSTALL_DIR)/usr/bin/$(PKG_NAME) $(1)/usr/bin/
 endef
 
-$(eval $(call BuildPackage,nano))
+$(eval $(call BuildPackage,nano-c))
 
