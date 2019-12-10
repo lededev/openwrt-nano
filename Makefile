@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nano
 PKG_VERSION:=4.6
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@GNU/nano
@@ -31,7 +31,7 @@ define Package/nano-c
   CATEGORY:=Utilities
   TITLE:=An enhanced clone of the Pico text editor
   URL:=https://www.nano-editor.org/
-  DEPENDS:=+libncurses
+  DEPENDS:=+libncurses +zlib
 endef
 
 define Package/nano-c/description
@@ -40,11 +40,19 @@ define Package/nano-c/description
 endef
 
 CONFIGURE_ARGS += \
-	--enable-tiny \
-	--enable-utf8 \
-	--without-slang \
-	--enable-color \
-	--enable-nanorc \
+        --enable-utf8 \
+        --without-slang \
+        --enable-color \
+        --enable-nanorc \
+        --disable-option-checking \
+        --disable-dependency-tracking \
+        --disable-largefile \
+        --disable-threads \
+        --disable-nls \
+        --disable-rpath \
+        --disable-browser \
+        --disable-mouse \
+        --disable-speller \
 
 CONFIGURE_VARS += \
 	ac_cv_header_regex_h=no \
