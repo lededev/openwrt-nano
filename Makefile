@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nano
-PKG_VERSION:=5.8
-PKG_RELEASE:=1
+PKG_VERSION:=6.3
+PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@GNU/nano
-PKG_HASH:=e43b63db2f78336e2aa123e8d015dbabc1720a15361714bfd4b1bb4e5e87768c
+PKG_HASH:=eb532da4985672730b500f685dbaab885a466d08fbbf7415832b95805e6f8687
 
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=COPYING
@@ -40,10 +40,14 @@ define Package/nano-c/description
 endef
 
 CONFIGURE_ARGS += \
+        --enable-help \
+        --enable-justify \
+        --enable-linenumbers \
+        --enable-multibuffer \
         --enable-utf8 \
-        --without-slang \
         --enable-color \
         --enable-nanorc \
+        --without-slang \
         --disable-option-checking \
         --disable-dependency-tracking \
         --disable-largefile \
