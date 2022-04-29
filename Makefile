@@ -64,6 +64,10 @@ CONFIGURE_VARS += \
 define Package/nano-c/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(CP) $(PKG_INSTALL_DIR)/usr/bin/$(PKG_NAME) $(1)/usr/bin/
+	$(INSTALL_DIR) $(1)/etc $(1)/usr/share/nano
+	$(INSTALL_CONF) ./files/nanorc $(1)/etc/nanorc
+	$(INSTALL_DATA) ./files/uci.nanorc $(1)/usr/share/nano
+	$(CP) $(PKG_INSTALL_DIR)/usr/share/nano/* $(1)/usr/share/nano
 endef
 
 $(eval $(call BuildPackage,nano-c))
