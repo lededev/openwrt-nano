@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nano
-PKG_VERSION:=6.3
+PKG_VERSION:=6.4
 PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@GNU/nano
-PKG_HASH:=eb532da4985672730b500f685dbaab885a466d08fbbf7415832b95805e6f8687
+PKG_HASH:=4199ae8ca78a7796de56de1a41b821dc47912c0307e9816b56cc317df34661c0
 
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=COPYING
@@ -50,16 +50,21 @@ CONFIGURE_ARGS += \
         --without-slang \
         --disable-option-checking \
         --disable-dependency-tracking \
-        --disable-largefile \
-        --disable-threads \
         --disable-nls \
-        --disable-rpath \
+        --disable-operatingdir \
         --disable-browser \
         --disable-mouse \
         --disable-speller \
+        --disable-extra \
+        --disable-tabcomp \
+        --disable-wordcomp
 
 CONFIGURE_VARS += \
 	ac_cv_header_regex_h=no \
+
+define Package/nano-c/conffiles
+/etc/nanorc
+endef
 
 define Package/nano-c/install
 	$(INSTALL_DIR) $(1)/usr/bin
